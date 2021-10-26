@@ -132,11 +132,10 @@ def choose_move(data: dict) -> str:
         next_move.sort(key=lambda x:x[1])
 
         for move in next_move:
-            print("HERE")
             if move[0] in possible_moves: 
                 print(f"{move} from {possible_moves}")
-                return move
-    print("THERE")    
+                return move[0]
+ 
     # Choose a random direction from the remaining possible_moves to move in, and then return that move
     move = random.choice(possible_moves)
     
