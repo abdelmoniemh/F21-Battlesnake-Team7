@@ -112,7 +112,7 @@ def choose_move(data: dict) -> str:
 
     # TODO: Using information from 'data', make your Battlesnake move towards a piece of food on the board
 
-    closest_food = data['food']['0']
+    closest_food = data['board']['food']['0']
     food_distance = lambda head, food: math.sqrt((head['x'] - food['x'])**2 + (head['y'] - food['y'])**2)
     min_distance = food_distance(my_head, closest_food)
     for food in data['board']['food']:
