@@ -129,7 +129,7 @@ def choose_move(data: dict) -> str:
             ('left', food_distance({'x':my_head['x'] - 1, 'y':my_head['y']}, closest_food)),
             ('right', food_distance({'x':my_head['x'] + 1, 'y':my_head['y']}, closest_food)),
         ]
-        next_move = next_move.sort(key=lambda x:x[1])
+        next_move.sort(key=lambda x:x[1])
 
         for move in next_move:
             if move[0] in possible_moves: 
