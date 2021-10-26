@@ -78,26 +78,26 @@ def choose_move(data: dict) -> str:
     # TODO Using information from 'data', don't let your Battlesnake pick a move that would hit its own body
 
     for block in my_body:
-        if (my_head['x'] + 1 == block['x'] and my_head['y'] == block['y']):
+        if (my_head['x'] + 1 == block[0] and my_head['y'] == block[1]):
             if 'right' in possible_moves: possible_moves.remove('right')
-        if (my_head['x'] - 1 == block['x'] and my_head['y'] == block['y']):
+        if (my_head['x'] - 1 == block[0] and my_head['y'] == block[1]):
             if 'left' in possible_moves: possible_moves.remove('left')
-        if (my_head['x'] == block['x'] and my_head['y'] + 1 == block['y']):
+        if (my_head['x'] == block[0] and my_head['y'] + 1 == block[1]):
             if 'up' in possible_moves: possible_moves.remove('up')
-        if (my_head['x'] == block['x'] and my_head['y'] - 1 == block['y']):
+        if (my_head['x'] == block[0] and my_head['y'] - 1 == block[1]):
             if 'down' in possible_moves: possible_moves.remove('down')
 
     # TODO: Using information from 'data', don't let your Battlesnake pick a move that would collide with another Battlesnake
 
     for snake in data['board']['snakes']:
         for block in snake:
-            if (my_head['x'] + 1 == block['x'] and my_head['y'] == block['y']):
+            if (my_head['x'] + 1 == block[0] and my_head['y'] == block[1]):
                 if 'right' in possible_moves: possible_moves.remove('right')
-            if (my_head['x'] - 1 == block['x'] and my_head['y'] == block['y']):
+            if (my_head['x'] - 1 == block[0] and my_head['y'] == block[1]):
                 if 'left' in possible_moves: possible_moves.remove('left')
-            if (my_head['x'] == block['x'] and my_head['y'] + 1 == block['y']):
+            if (my_head['x'] == block[0] and my_head['y'] + 1 == block[1]):
                 if 'up' in possible_moves: possible_moves.remove('up')
-            if (my_head['x'] == block['x'] and my_head['y'] - 1 == block['y']):
+            if (my_head['x'] == block[0] and my_head['y'] - 1 == block[1]):
                 if 'down' in possible_moves: possible_moves.remove('down')
 
 
