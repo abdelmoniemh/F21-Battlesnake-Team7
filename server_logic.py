@@ -111,38 +111,39 @@ def choose_move(data: dict) -> str:
 
 
     # TODO: Using information from 'data', make your Battlesnake move towards a piece of food on the board
-
-    closest_food = data['board']['food'][0]
-    food_distance = lambda head, food: math.sqrt((head['x'] - food['x'])**2 + (head['y'] - food['y'])**2)
-    min_distance = food_distance(my_head, closest_food)
-    for food in data['board']['food']:
-        temp_distance = food_distance(my_head, food)
-        if temp_distance < min_distance:
-            closest_food = food
-            min_distance = temp_distance
-    #choose move that will move you towards the closest food item
     ideal_moves = possible_moves.copy()
-    for move in ideal_moves:
-        if move == 'up':
-            temp_head = my_head.copy()
-            temp_head["y"] += 1
-            if (food_distance(temp_head, closest_food) < min_distance):
-                if 'up' in ideal_moves: ideal_moves.remove('up')
-        elif move == 'down':
-            temp_head = my_head.copy()
-            temp_head["y"] -= 1
-            if (food_distance(temp_head, closest_food) < min_distance):
-                if 'down' in ideal_moves: ideal_moves.remove('down')
-        elif move == 'right':
-            temp_head = my_head.copy()
-            temp_head["x"] += 1
-            if (food_distance(temp_head, closest_food) < min_distance):
-                if 'right' in ideal_moves: ideal_moves.remove('right')
-        else:
-            temp_head = my_head.copy()
-            temp_head["x"] -= 1
-            if (food_distance(temp_head, closest_food) < min_distance):
-                if 'left' in ideal_moves: ideal_moves.remove('left')
+    if len(data['board']['food']) > 0:
+        closest_food = data['board']['food'][0]
+        food_distance = lambda head, food: math.sqrt((head['x'] - food['x'])**2 + (head['y'] - food['y'])**2)
+        min_distance = food_distance(my_head, closest_food)
+        for food in data['board']['food']:
+            temp_distance = food_distance(my_head, food)
+            if temp_distance < min_distance:
+                closest_food = food
+                min_distance = temp_distance
+        #choose move that will move you towards the closest food item
+        
+        for move in ideal_moves:
+            if move == 'up':
+                temp_head = my_head.copy()
+                temp_head["y"] += 1
+                if (food_distance(temp_head, closest_food) < min_distance):
+                    if 'up' in ideal_moves: ideal_moves.remove('up')
+            elif move == 'down':
+                temp_head = my_head.copy()
+                temp_head["y"] -= 1
+                if (food_distance(temp_head, closest_food) < min_distance):
+                    if 'down' in ideal_moves: ideal_moves.remove('down')
+            elif move == 'right':
+                temp_head = my_head.copy()
+                temp_head["x"] += 1
+                if (food_distance(temp_head, closest_food) < min_distance):
+                    if 'right' in ideal_moves: ideal_moves.remove('right')
+            else:
+                temp_head = my_head.copy()
+                temp_head["x"] -= 1
+                if (food_distance(temp_head, closest_food) < min_distance):
+                    if 'left' in ideal_moves: ideal_moves.remove('left')
     # Choose a random direction from the remaining possible_moves to move in, and then return that move
     move = random.choice(ideal_moves) if (ideal_moves) else  random.choice(possible_moves)
     
