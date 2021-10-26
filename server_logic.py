@@ -89,8 +89,8 @@ def choose_move(data: dict) -> str:
 
     # TODO: Using information from 'data', don't let your Battlesnake pick a move that would collide with another Battlesnake
 
-    for snake in data['board']['snakes']['body']:
-        for block in snake:
+    for snake in data['board']['snakes']:
+        for block in snake['body']:
             if (my_head['x'] + 1 == block['x'] and my_head['y'] == block['y']):
                 if 'right' in possible_moves: possible_moves.remove('right')
             if (my_head['x'] - 1 == block['x'] and my_head['y'] == block['y']):
@@ -99,8 +99,7 @@ def choose_move(data: dict) -> str:
                 if 'up' in possible_moves: possible_moves.remove('up')
             if (my_head['x'] == block['x'] and my_head['y'] - 1 == block['y']):
                 if 'down' in possible_moves: possible_moves.remove('down')
-    for snake in data['board']['snakes']['head']:
-        for block in snake:
+        for block in snake['head']:
             if (my_head['x'] + 1 == block['x'] and my_head['y'] == block['y']):
                 if 'right' in possible_moves: possible_moves.remove('right')
             if (my_head['x'] - 1 == block['x'] and my_head['y'] == block['y']):
