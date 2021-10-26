@@ -129,16 +129,16 @@ def choose_move(data: dict) -> str:
                 temp_head["y"] += 1
                 if (food_distance(temp_head, closest_food) > min_distance):
                     if 'up' in ideal_moves: ideal_moves.remove('up')
-            elif move == 'down':
-                temp_head = my_head.copy()
-                temp_head["y"] -= 1
-                if (food_distance(temp_head, closest_food) > min_distance):
-                    if 'down' in ideal_moves: ideal_moves.remove('down')
             elif move == 'right':
                 temp_head = my_head.copy()
                 temp_head["x"] += 1
                 if (food_distance(temp_head, closest_food) > min_distance):
                     if 'right' in ideal_moves: ideal_moves.remove('right')
+            elif move == 'down':
+                temp_head = my_head.copy()
+                temp_head["y"] -= 1
+                if (food_distance(temp_head, closest_food) > min_distance):
+                    if 'down' in ideal_moves: ideal_moves.remove('down')
             else:
                 temp_head = my_head.copy()
                 temp_head["x"] -= 1
