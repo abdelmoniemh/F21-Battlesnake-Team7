@@ -123,29 +123,21 @@ def choose_move(data: dict) -> str:
                 min_distance = temp_distance
         #choose move that will move you towards the closest food item
         
-        for move in ideal_moves:
-            if move == 'up':
-                temp_head = my_head.copy()
-                temp_head["y"] += 1
-                if (food_distance(temp_head, closest_food) > min_distance):
-                    if 'up' in ideal_moves: ideal_moves.remove('up')
-            elif move == 'right':
-                temp_head = my_head.copy()
-                temp_head["x"] += 1
-                if (food_distance(temp_head, closest_food) > min_distance):
-                    if 'right' in ideal_moves: ideal_moves.remove('right')
-            elif move == 'down':
-                temp_head = my_head.copy()
-                temp_head["y"] -= 1
-                if (food_distance(temp_head, closest_food) > min_distance):
-                    if 'down' in ideal_moves: ideal_moves.remove('down')
-            else:
-                temp_head = my_head.copy()
-                temp_head["x"] -= 1
-                if (food_distance(temp_head, closest_food) > min_distance):
-                    if 'left' in ideal_moves: ideal_moves.remove('left')
+        next_move = [
+            ('up', food_distance({'x':my_head['x'], 'y':my_head['y'] + 1}, closest_food)),
+            ('down', food_distance({'x':my_head['x'], 'y':my_head['y'] - 1}, closest_food)),
+            ('left', food_distance({'x':my_head['x'] - 1, 'y':my_head['y']}, closest_food)),
+            ('right', food_distance({'x':my_head['x'] + 1, 'y':my_head['y']}, closest_food)),
+        ]
+        next_move = next_move.sort(key=lambda x:x[1])
+
+        for move in next_move:
+            if move[0] in possible_moves: 
+                print(f"{data['game']['id']} MOVE {data['turn']}: {move} picked from all valid options in {possible_moves}")
+                return move
+        
     # Choose a random direction from the remaining possible_moves to move in, and then return that move
-    move = random.choice(ideal_moves) if (ideal_moves) else  random.choice(possible_moves)
+    move = random.choice(possible_moves)
     
     # TODO: Explore new strategies for picking a move that are better than random
 
