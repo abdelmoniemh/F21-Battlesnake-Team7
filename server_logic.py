@@ -127,22 +127,22 @@ def choose_move(data: dict) -> str:
             if move == 'up':
                 temp_head = my_head.copy()
                 temp_head["y"] += 1
-                if (food_distance(temp_head, closest_food) < min_distance):
+                if (food_distance(temp_head, closest_food) > min_distance):
                     if 'up' in ideal_moves: ideal_moves.remove('up')
             elif move == 'down':
                 temp_head = my_head.copy()
                 temp_head["y"] -= 1
-                if (food_distance(temp_head, closest_food) < min_distance):
+                if (food_distance(temp_head, closest_food) > min_distance):
                     if 'down' in ideal_moves: ideal_moves.remove('down')
             elif move == 'right':
                 temp_head = my_head.copy()
                 temp_head["x"] += 1
-                if (food_distance(temp_head, closest_food) < min_distance):
+                if (food_distance(temp_head, closest_food) > min_distance):
                     if 'right' in ideal_moves: ideal_moves.remove('right')
             else:
                 temp_head = my_head.copy()
                 temp_head["x"] -= 1
-                if (food_distance(temp_head, closest_food) < min_distance):
+                if (food_distance(temp_head, closest_food) > min_distance):
                     if 'left' in ideal_moves: ideal_moves.remove('left')
     # Choose a random direction from the remaining possible_moves to move in, and then return that move
     move = random.choice(ideal_moves) if (ideal_moves) else  random.choice(possible_moves)
