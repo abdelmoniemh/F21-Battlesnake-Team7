@@ -129,10 +129,16 @@ def choose_move(data: dict) -> str:
             ('left', food_distance({'x':my_head['x'] - 1, 'y':my_head['y']}, closest_food)),
             ('right', food_distance({'x':my_head['x'] + 1, 'y':my_head['y']}, closest_food)),
         ]
+        next_move_head = {
+            'up': {'x':my_head['x'], 'y':my_head['y'] + 1},
+            'down': {'x':my_head['x'], 'y':my_head['y'] - 1},
+            'left':{'x':my_head['x'] - 1, 'y':my_head['y']},
+            'right':{'x':my_head['x'] + 1, 'y':my_head['y']}
+        }
         next_move.sort(key=lambda x:x[1])
 
         for move in next_move:
-            if move[0] in possible_moves: 
+            if move[0] in possible_moves and len(choose_move(data, next_move_head[move[0]])) > 0: 
                 print(f"{move} from {possible_moves}")
                 return move[0]
  
@@ -144,3 +150,57 @@ def choose_move(data: dict) -> str:
     print(f"{data['game']['id']} MOVE {data['turn']}: {move} picked from all valid options in {possible_moves}")
 
     return move
+
+def choose_move(data: dict, head: dict) -> str:
+    my_head = head # A dictionary of x/y coordinates like {"x": 0, "y": 0}
+    my_body = data["you"]["body"]  # A list of x/y coordinate dictionaries like [ {"x": 0, "y": 0}, {"x": 1, "y": 0}, {"x": 2, "y": 0} ]
+
+    possible_moves = ["up", "down", "left", "right"]
+
+    
+    possible_moves = avoid_my_neck(my_head, my_body, possible_moves)
+
+    
+    board_height = data['board']['height']
+    board_width = data['board']['height']
+
+    if (my_head['x'] + 1 >= board_width): 
+        possible_moves.remove('right')
+    if (my_head['x'] - 1 < 0):
+        possible_moves.remove('left')
+    if (my_head['y'] + 1 >= board_height):
+        possible_moves.remove('up')
+    if (my_head['y'] - 1 < 0):
+        possible_moves.remove('down')
+
+    for block in my_body:
+        if (my_head['x'] + 1 == block['x'] and my_head['y'] == block['y']):
+            if 'right' in possible_moves: possible_moves.remove('right')
+        if (my_head['x'] - 1 == block['x'] and my_head['y'] == block['y']):
+            if 'left' in possible_moves: possible_moves.remove('left')
+        if (my_head['x'] == block['x'] and my_head['y'] + 1 == block['y']):
+            if 'up' in possible_moves: possible_moves.remove('up')
+        if (my_head['x'] == block['x'] and my_head['y'] - 1 == block['y']):
+            if 'down' in possible_moves: possible_moves.remove('down')
+
+    for snake in data['board']['snakes']:
+        for block in snake['body']:
+            if (my_head['x'] + 1 == block['x'] and my_head['y'] == block['y']):
+                if 'right' in possible_moves: possible_moves.remove('right')
+            if (my_head['x'] - 1 == block['x'] and my_head['y'] == block['y']):
+                if 'left' in possible_moves: possible_moves.remove('left')
+            if (my_head['x'] == block['x'] and my_head['y'] + 1 == block['y']):
+                if 'up' in possible_moves: possible_moves.remove('up')
+            if (my_head['x'] == block['x'] and my_head['y'] - 1 == block['y']):
+                if 'down' in possible_moves: possible_moves.remove('down')
+        block = snake['head']
+        if (my_head['x'] + 1 == block['x'] and my_head['y'] == block['y']):
+            if 'right' in possible_moves: possible_moves.remove('right')
+        if (my_head['x'] - 1 == block['x'] and my_head['y'] == block['y']):
+            if 'left' in possible_moves: possible_moves.remove('left')
+        if (my_head['x'] == block['x'] and my_head['y'] + 1 == block['y']):
+            if 'up' in possible_moves: possible_moves.remove('up')
+        if (my_head['x'] == block['x'] and my_head['y'] - 1 == block['y']):
+            if 'down' in possible_moves: possible_moves.remove('down')
+
+    return possible_moves
