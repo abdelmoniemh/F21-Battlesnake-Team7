@@ -138,7 +138,7 @@ def choose_move(data: dict) -> str:
         next_move.sort(key=lambda x:x[1])
 
         for move in next_move:
-            if move[0] in possible_moves and len(choose_move(data, next_move_head[move[0]])) > 0: 
+            if move[0] in possible_moves and len(choose_move_next(data, next_move_head[move[0]])) > 0: 
                 print(f"{move} from {possible_moves}")
                 return move[0]
  
@@ -151,7 +151,7 @@ def choose_move(data: dict) -> str:
 
     return move
 
-def choose_move(data: dict, head: dict) -> str:
+def choose_move_next(data: dict, head: dict) -> str:
     my_head = head # A dictionary of x/y coordinates like {"x": 0, "y": 0}
     my_body = data["you"]["body"]  # A list of x/y coordinate dictionaries like [ {"x": 0, "y": 0}, {"x": 1, "y": 0}, {"x": 2, "y": 0} ]
 
