@@ -136,14 +136,16 @@ def choose_move(data: dict) -> str:
             'right':{'x':my_head['x'] + 1, 'y':my_head['y']}
         }
         next_move.sort(key=lambda x:x[1])
-        next_status = choose_move_next(data, next_move_head[move[0]], False)
+        
         for move in next_move:
+            next_status = choose_move_next(data, next_move_head[move[0]], False)
             if move[0] in possible_moves and len(next_status) > 0: 
                 if move[0] in next_status and next_status[move[0]] > 0:
                     print(f"{move} from {possible_moves}")
                     return move[0]
 
         for move in next_move:
+            next_status = choose_move_next(data, next_move_head[move[0]], False)
             if move[0] in possible_moves and len(next_status) > 0: 
                 return move[0]
 
