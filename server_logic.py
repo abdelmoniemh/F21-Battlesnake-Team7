@@ -108,44 +108,8 @@ def choose_move(data: dict) -> str:
             if 'up' in possible_moves: possible_moves.remove('up')
         if (my_head['x'] == block['x'] and my_head['y'] - 1 == block['y']):
             if 'down' in possible_moves: possible_moves.remove('down')
-
-        if len(snake['body']) >= len(my_body):
-            if (my_head['x'] + 1 == block['x'] + 1 and my_head['y'] == block['y']):
-                if 'right' in possible_moves: possible_moves.remove('right')
-            if (my_head['x'] - 1 == block['x'] + 1 and my_head['y'] == block['y']):
-                if 'left' in possible_moves: possible_moves.remove('left')
-            if (my_head['x'] == block['x'] + 1 and my_head['y'] + 1 == block['y']):
-                if 'up' in possible_moves: possible_moves.remove('up')
-            if (my_head['x'] == block['x'] + 1 and my_head['y'] - 1 == block['y']):
-                if 'down' in possible_moves: possible_moves.remove('down')
-
-            if (my_head['x'] + 1 == block['x'] -1 and my_head['y'] == block['y']):
-                if 'right' in possible_moves: possible_moves.remove('right')
-            if (my_head['x'] - 1 == block['x'] -1 and my_head['y'] == block['y']):
-                if 'left' in possible_moves: possible_moves.remove('left')
-            if (my_head['x'] == block['x'] -1 and my_head['y'] + 1 == block['y']):
-                if 'up' in possible_moves: possible_moves.remove('up')
-            if (my_head['x'] == block['x']-1 and my_head['y'] - 1 == block['y']):
-                if 'down' in possible_moves: possible_moves.remove('down')
-
-            if (my_head['x'] + 1 == block['x'] and my_head['y'] == block['y'] + 1):
-                if 'right' in possible_moves: possible_moves.remove('right')
-            if (my_head['x'] - 1 == block['x'] and my_head['y'] == block['y'] + 1):
-                if 'left' in possible_moves: possible_moves.remove('left')
-            if (my_head['x'] == block['x'] and my_head['y'] + 1 == block['y'] + 1):
-                if 'up' in possible_moves: possible_moves.remove('up')
-            if (my_head['x'] == block['x'] and my_head['y'] - 1 == block['y'] + 1):
-                if 'down' in possible_moves: possible_moves.remove('down')
-
-            if (my_head['x'] + 1 == block['x'] and my_head['y'] == block['y'] - 1):
-                if 'right' in possible_moves: possible_moves.remove('right')
-            if (my_head['x'] - 1 == block['x'] and my_head['y'] == block['y'] - 1):
-                if 'left' in possible_moves: possible_moves.remove('left')
-            if (my_head['x'] == block['x'] and my_head['y'] + 1 == block['y'] - 1):
-                if 'up' in possible_moves: possible_moves.remove('up')
-            if (my_head['x'] == block['x'] and my_head['y'] - 1 == block['y'] - 1):
-                if 'down' in possible_moves: possible_moves.remove('down')
-
+        
+        
 
     # TODO: Using information from 'data', make your Battlesnake move towards a piece of food on the board
     ideal_moves = possible_moves.copy()
