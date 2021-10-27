@@ -139,9 +139,10 @@ def choose_move(data: dict) -> str:
 
         for move in next_move:
             next_status = choose_move_next(data, next_move_head[move[0]], False)
-            if move[0] in possible_moves and len(next_status) > 0 and next_status[move[0]] > 0: 
-                print(f"{move} from {possible_moves}")
-                return move[0]
+            if move[0] in possible_moves and len(next_status) > 0: 
+                if move[0] in next_status and next_status[move[0]] > 0:
+                    print(f"{move} from {possible_moves}")
+                    return move[0]
  
     # Choose a random direction from the remaining possible_moves to move in, and then return that move
     move = random.choice(possible_moves)
